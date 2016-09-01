@@ -2,8 +2,6 @@
 logs
 *.log
 
-.babelrc
-
 npm-debug.log*
 
 # Runtime data

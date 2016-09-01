@@ -23,7 +23,7 @@ var List = React.createClass({
     },
     render: function() {
       var msgList = this.state.message.map(function(name, i){
-                        return <li key={i}>{name}</li>;
+                        return <li key={i}>{name}</li>
                       })
       return(
         <div>
