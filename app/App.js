@@ -1,12 +1,11 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+var Mount = require('./Mount')
 
 var List = React.createClass({
   getInitialState: function() {
-    return {value: 'Hello!', message: []};
-  },
-    componentDidMount: function () {
-      this.connection = new WebSocket('wss://echo.websocket.org');
+    this.connection = new WebSocket('wss://echo.websocket.org');
+    return {value: '', message: []};
   },
     handleChange: function(event) {
       this.setState({value: event.target.value});
@@ -22,19 +21,14 @@ var List = React.createClass({
       this.setState({message: []})
     },
     render: function() {
-      var msgList = this.state.message.map(function(name, i){
-                        return <li key={i}>{name}</li>
-                      })
       return(
-        <div>
-          <input
-            type="text"
-            defaultValue={this.state.value}
-            onChange={this.handleChange}/>
-            <button value={this.state.value} onClick={this.sendMsg}> Send</button>
-            <button onClick={this.clear}>Clear</button>
-            <ul>{ msgList }</ul>
-        </div>
+        <Mount
+        value={this.state.value}
+        message={this.state.message}
+        onChange={this.handleChange}
+        sendMsg={this.sendMsg}
+        clear={this.clear}
+        />
       );
     }
 });

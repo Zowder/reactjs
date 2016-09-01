@@ -48,15 +48,14 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
+	var Mount = __webpack_require__(172);
 
 	var List = React.createClass({
 	  displayName: 'List',
 
 	  getInitialState: function getInitialState() {
-	    return { value: 'Hello!', message: [] };
-	  },
-	  componentDidMount: function componentDidMount() {
 	    this.connection = new WebSocket('wss://echo.websocket.org');
+	    return { value: '', message: [] };
 	  },
 	  handleChange: function handleChange(event) {
 	    this.setState({ value: event.target.value });
@@ -72,36 +71,13 @@
 	    this.setState({ message: [] });
 	  },
 	  render: function render() {
-	    var msgList = this.state.message.map(function (name, i) {
-	      return React.createElement(
-	        'li',
-	        { key: i },
-	        name
-	      );
+	    return React.createElement(Mount, {
+	      value: this.state.value,
+	      message: this.state.message,
+	      onChange: this.handleChange,
+	      sendMsg: this.sendMsg,
+	      clear: this.clear
 	    });
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement('input', {
-	        type: 'text',
-	        defaultValue: this.state.value,
-	        onChange: this.handleChange }),
-	      React.createElement(
-	        'button',
-	        { value: this.state.value, onClick: this.sendMsg },
-	        ' Send'
-	      ),
-	      React.createElement(
-	        'button',
-	        { onClick: this.clear },
-	        'Clear'
-	      ),
-	      React.createElement(
-	        'ul',
-	        null,
-	        msgList
-	      )
-	    );
 	  }
 	});
 
@@ -21477,6 +21453,52 @@
 
 	module.exports = ReactDOMNullInputValuePropHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Mount = React.createClass({
+	  displayName: "Mount",
+
+	  render: function render() {
+	    var msgList = this.props.message.map(function (name, i) {
+	      return React.createElement(
+	        "li",
+	        { key: i },
+	        name
+	      );
+	    });
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement("input", {
+	        type: "text",
+	        value: this.props.value,
+	        onChange: this.props.onChange }),
+	      React.createElement(
+	        "button",
+	        { value: this.props.value, onClick: this.props.sendMsg },
+	        "Send"
+	      ),
+	      React.createElement(
+	        "button",
+	        { onClick: this.props.clear },
+	        "Clear"
+	      ),
+	      React.createElement(
+	        "ul",
+	        null,
+	        msgList
+	      )
+	    );
+	  }
+	});
+	module.exports = Mount;
 
 /***/ }
 /******/ ]);
