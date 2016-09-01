@@ -1,0 +1,41 @@
+{
+  "name": "reactjs-study",
+  "version": "1.0.0",
+  "description": "Study",
+  "main": "index.js",
+
+"scripts": {
+    "webpack-watch": "webpack -w",
+    "express-server": "node src/server.js",
+    "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  
+"repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zowder/reactjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zowder/reactjs/issues"
+  },
+  "homepage": "https://github.com/Zowder/reactjs#readme",
+  "dependencies": {
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-class-properties": "^6.11.5",
+    "babel-plugin-transform-runtime": "^6.12.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.14.0",
+    "express": "^4.14.0",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "concurrently": "^2.2.0"
+  }
+}
