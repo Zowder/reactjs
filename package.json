@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "description": "Study",
   "main": "index.js",
-
-"scripts": {
+  "scripts": {
     "webpack-watch": "webpack -w",
     "express-server": "node src/server.js",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
-"repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/Zowder/reactjs.git"
   },
@@ -36,6 +34,7 @@
     "webpack": "^1.13.2"
   },
   "devDependencies": {
-    "concurrently": "^2.2.0"
+    "concurrently": "^2.2.0",
+    "react-hot-loader": "^1.3.0"
   }
 }

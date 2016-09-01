@@ -49,11 +49,63 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
 
-	ReactDOM.render(React.createElement(
-	  'h1',
-	  null,
-	  'Hello, world!'
-	), document.getElementById('root'));
+	var List = React.createClass({
+	  displayName: 'List',
+
+	  getInitialState: function getInitialState() {
+	    return { value: 'Hello!', message: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.connection = new WebSocket('wss://echo.websocket.org');
+	  },
+	  handleChange: function handleChange(event) {
+	    this.setState({ value: event.target.value });
+	  },
+	  sendMsg: function sendMsg(event) {
+	    this.connection.send(event.target.value);
+	    console.log(event.target.value);
+	    this.connection.onmessage = function (ev) {
+	      this.setState({ message: this.state.message.concat([ev.data + " - Response WS"]) });
+	    }.bind(this);
+	  },
+	  clear: function clear() {
+	    this.setState({ message: [] });
+	  },
+	  render: function render() {
+	    var msgList = this.state.message.map(function (name, i) {
+	      return React.createElement(
+	        'li',
+	        { key: i },
+	        name
+	      );
+	    });
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement('input', {
+	        type: 'text',
+	        defaultValue: this.state.value,
+	        onChange: this.handleChange }),
+	      React.createElement(
+	        'button',
+	        { value: this.state.value, onClick: this.sendMsg },
+	        ' Send'
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.clear },
+	        'Clear'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        msgList
+	      )
+	    );
+	  }
+	});
+
+	ReactDOM.render(React.createElement(List, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
